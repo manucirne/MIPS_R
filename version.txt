@@ -1,0 +1,4 @@
+Version=18.1.0.625
+[ACDS]
+Version=18.1.0.625
+Edition=lite

@@ -1,0 +1,29 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+-- Baseado no apendice C (Register Files) do COD (Patterson & Hennessy).
+
+entity banco_reg is
+    generic
+    (
+
+    );
+-- Leitura de 2 registradores e escrita em 1 registrador simultaneamente.
+    port
+    (
+		clk : in std_logic; -- Entrada do clock
+		reset : in std_logic;
+		escreveC : in std_logic := '0';
+		func : in std_logic_vector (2 downto 0);
+		
+		
+    );
+end entity;
+
+architecture comportamento of banco_reg is
+
+
+begin
+
+end architecture;

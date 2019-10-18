@@ -1,0 +1,28 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+-- Baseado no apendice C (Register Files) do COD (Patterson & Hennessy).
+
+entity FPGA_MIPS is
+    generic
+    (
+    );
+-- Leitura de 2 registradores e escrita em 1 registrador simultaneamente.
+    port
+    (
+    );
+end entity;
+
+architecture comportamento of FPGA_MIPS is
+
+
+
+begin
+
+	mips_r: entity work.MIPS
+		Generic Map(addrWidth=>32,regAddrWidth => 5,dataWidth=>32)
+		Port Map(clk=>,reset=>,escreveC=>,func=>,romOut=>);
+		
+end architecture;
+               
