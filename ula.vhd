@@ -18,7 +18,7 @@ entity ula is
 		B : in std_logic_vector (DATA_WIDTH-1 downto 0);
 		
 		-- Diz qual funcao sera executada.
-		func : in std_logic_vector (2 downto 0);
+		func : in std_logic_vector (5 downto 0);
 		
 		-- Saida quando tem soma ou subtracao
 		Y : out std_logic_vector (DATA_WIDTH-1 downto 0)
@@ -34,10 +34,10 @@ architecture ulaArch of ula is
 	signal maior_que, igual_que, menor_que : std_logic;
 
 	--Soma A + B
-	constant SOMA : std_logic_vector(2 downto 0) := "000";
+	constant SOMA : std_logic_vector(5 downto 0) := "000000";
 
 	--SUBTRAI A - B
-	constant SUBTRAI : std_logic_vector(2 downto 0) := "010";
+	constant SUBTRAI : std_logic_vector(5 downto 0) := "000010";
 
 begin
 	

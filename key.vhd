@@ -10,33 +10,25 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 entity key is
-	Generic ( 
-		TOTAL_KEY : natural := 2; -- Numero total de botoes que serao utilizadas
-		DATA_SIZE : natural := 8 -- Tamanho dos dados que devem ser enviados para o processador
-	);
 	
 	port
 	(
-		key_in : in std_logic_vector(TOTAL_KEY-1 downto 0); -- Entrada dos botoes que serao utilizados
+		key_in : in std_logic; -- Entrada dos botoes que serao utilizados
 		enable : in std_logic; -- Habilita leitura dos botoes
 		
-		led_in : out std_logic_vector(TOTAL_KEY-1 downto 0); -- Led que indica o botao que esta sendo apertado
-		key_out : out std_logic_vector(DATA_SIZE-1 downto 0) -- Informacao lida que e enviada para o processador
+		led_in : out std_logic; -- Led que indica o botao que esta sendo apertado
+		key_out : out std_logic -- Informacao lida que e enviada para o processador
 	);
-end my_key;
+end key;
 
 -- Library Clause(s) (optional)
 -- Use Clause(s) (optional)
 architecture keyArch of key is
 
-	signal sig_key : std_logic_vector(DATA_SIZE-1 downto 0);
-	
 begin
 	
-	sig_key <= ( std_logic_vector(to_unsigned(0, key_out'length - key_in'length)) & not(key_in)); -- Transforma a leitura num vetor de data size
-	
-	key_out <= sig_key when (enable = '1') else (others=>'Z'); -- Envia informacao para o processador
+	key_out <= (not(key_in)) when (enable = '1') else ('Z');
 	led_in <= not(key_in); -- Acende os leds
 	
 	
-end keyArch;
+end architecture ;

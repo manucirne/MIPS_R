@@ -10,7 +10,7 @@ entity banco_reg is
         larguraDados        : natural := 32;
         larguraEndBancoRegs : natural := 5   --Resulta em 2^5=32 posicoes
     );
--- Leitura de 2 registradores e escrita em 1 registrador simultaneamente.
+-- Leitura de 2 BCsiges e escrita em 1 BCsig simultaneamente.
     port
     (
         clk        : in std_logic;
@@ -28,19 +28,34 @@ entity banco_reg is
 end entity;
 
 architecture comportamento of banco_reg is
+	 
+	 type blocoBC is array(0 TO 2**larguraEndBancoRegs - 1) of std_logic_vector(larguraDados-1 DOWNTO 0);
 
-    subtype palavra_t is std_logic_vector((larguraDados-1) downto 0);
-    type memoria_t is array(2**larguraEndBancoRegs-1 downto 0) of palavra_t;
+  function initBC
+        return blocoBC is variable tmp : blocoBC := (others => (others => '0'));
+  begin
+        -- Inicializa os endereços:
+        tmp(0) := x"00";
+        tmp(1) := x"01";
+        tmp(2) := x"02";
+        tmp(3) := x"03";
+        tmp(4) := x"04";
+        tmp(5) := x"05";
+        tmp(6) := x"06";
+        tmp(7) := x"07";
+        return tmp;
+    end initBC;
 
-    -- Declaracao dos registradores:
-    shared variable registrador : memoria_t;
+    signal BCsig : blocoBC := initBC;
+	 
+	 
 
 begin
     process(clk) is
     begin
         if (rising_edge(clk)) then
             if (escreveC = '1') then
-                registrador(to_integer(unsigned(enderecoC))) := dadoEscritaC;
+                BCsig(to_integer(unsigned(enderecoC))) <= dadoEscritaC;
             end if;
         end if;
     end process;
@@ -51,12 +66,12 @@ begin
          if (unsigned(enderecoA) = 0) then
             saidaA <= (others => '0');
          else
-            saidaA <= registrador(to_integer(unsigned(enderecoA)));
+            saidaA <= BCsig(to_integer(unsigned(enderecoA)));
          end if;
          if (unsigned(enderecoB) = 0) then
             saidaB <= (others => '0');
          else
-            saidaB <= registrador(to_integer(unsigned(enderecoB)));
+            saidaB <= BCsig(to_integer(unsigned(enderecoB)));
         end if;
      end process;
 end architecture;
