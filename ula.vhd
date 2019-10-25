@@ -31,13 +31,12 @@ end ula;
 -- Use Clause(s) (optional)
 
 architecture ulaArch of ula is
-	signal maior_que, igual_que, menor_que : std_logic;
 
 	--Soma A + B
-	constant SOMA : std_logic_vector(5 downto 0) := "000000";
+	constant SOMA : std_logic_vector(5 downto 0) := "100000";
 
 	--SUBTRAI A - B
-	constant SUBTRAI : std_logic_vector(5 downto 0) := "000010";
+	constant SUBTRAI : std_logic_vector(5 downto 0) := "100010";
 
 begin
 	

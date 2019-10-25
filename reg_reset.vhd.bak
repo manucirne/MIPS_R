@@ -4,7 +4,7 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all; -- Utilizado para o Generic
 
 entity reg_reset is
-	generic (DATA_WIDTH : natural := 10; --Tamanho do dado
+	generic (DATA_WIDTH : natural := 10 --Tamanho do dado
 	);
     
 	 port
@@ -24,7 +24,7 @@ begin
 	begin
 		-- Reset whenever the reset signal goes low, regardless of the clock
 		if (reset = '0') then
-			saida <= '0';
+			saida <= (others => '0');
 		-- If not resetting, update the register output on the clock's rising edge
 		elsif (rising_edge(clk)) then
 			saida <= entrada;

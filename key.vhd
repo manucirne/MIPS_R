@@ -13,11 +13,10 @@ entity key is
 	
 	port
 	(
-		key_in : in std_logic; -- Entrada dos botoes que serao utilizados
-		enable : in std_logic; -- Habilita leitura dos botoes
-		
-		led_in : out std_logic; -- Led que indica o botao que esta sendo apertado
-		key_out : out std_logic -- Informacao lida que e enviada para o processador
+		key_in : in std_logic_vector(0 downto 0); -- Entrada dos botoes que serao utilizados
+		clk : in std_logic;
+		reset : in std_logic;
+		key_out : out std_logic_vector(0 downto 0) -- Informacao lida que e enviada para o processador
 	);
 end key;
 
@@ -26,9 +25,16 @@ end key;
 architecture keyArch of key is
 
 begin
+
+	REGISTRADOR: entity work.reg_reset
+		generic map (DATA_WIDTH => 1 --Tamanho do dado
+		)
+		Port Map(clk=>clk,
+		entrada=>key_in,
+		reset=>reset,
+		saida=>key_out);
 	
-	key_out <= (not(key_in)) when (enable = '1') else ('Z');
-	led_in <= not(key_in); -- Acende os leds
+--	key_out <= (not(key_in)) when (enable = '1') else ('Z');
 	
 	
 end architecture ;

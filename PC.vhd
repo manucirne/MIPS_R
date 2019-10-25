@@ -26,11 +26,17 @@ begin
 	sig_entrada<=end_proximo;
 
 	SOMADOR: entity work.somador
-		Generic Map(DATA_WIDTH=>DATA_PC_SIZE)
-		Port Map(A=>sig_entrada,clk=>clk,Y=>sig_somador);
+		Generic Map(DATA_WIDTH=>DATA_PC_SIZE,
+		constante=>4)
+		Port Map(A=>sig_entrada,
+		clk=>clk,
+		Y=>sig_somador);
 		
 	REGISTRADOR: entity work.reg_reset
 		Generic Map(DATA_WIDTH=>DATA_PC_SIZE)
-		Port Map(clk=>clk,entrada=>sig_somador,reset=>reset,saida=>end_proximo);
+		Port Map(clk=>clk,
+		entrada=>sig_somador,
+		reset=>reset,
+		saida=>end_proximo);
 	  
 end architecture;

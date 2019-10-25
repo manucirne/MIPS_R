@@ -1,0 +1,28 @@
+Quartus Prime Archive log --	C:/Users/manuc/Desktop/insper/sem6/Arquit/MIPS/MIPS.qarlog
+
+Archive:	C:/Users/manuc/Desktop/insper/sem6/Arquit/MIPS/MIPS.qar
+Date:		Fri Oct 25 10:43:19 2019
+Quartus Prime		18.1.0 Build 625 09/12/2018 SJ Lite Edition
+
+	=========== Files Selected: ===========
+C:/Users/manuc/Desktop/insper/sem6/Arquit/MIPS/BC.vhd
+C:/Users/manuc/Desktop/insper/sem6/Arquit/MIPS/FPGA_MIPD.vhd
+C:/Users/manuc/Desktop/insper/sem6/Arquit/MIPS/MIPS.qpf
+C:/Users/manuc/Desktop/insper/sem6/Arquit/MIPS/MIPS.qsf
+C:/Users/manuc/Desktop/insper/sem6/Arquit/MIPS/MIPS.vhd
+C:/Users/manuc/Desktop/insper/sem6/Arquit/MIPS/PC.vhd
+C:/Users/manuc/Desktop/insper/sem6/Arquit/MIPS/ROM.vhd
+C:/Users/manuc/Desktop/insper/sem6/Arquit/MIPS/Waveform.vwf
+C:/Users/manuc/Desktop/insper/sem6/Arquit/MIPS/Waveform1.vwf
+C:/Users/manuc/Desktop/insper/sem6/Arquit/MIPS/conversor7seg.vhd
+C:/Users/manuc/Desktop/insper/sem6/Arquit/MIPS/edgeDetector.vhd
+C:/Users/manuc/Desktop/insper/sem6/Arquit/MIPS/key.vhd
+C:/Users/manuc/Desktop/insper/sem6/Arquit/MIPS/output_files/Teste_Relogio.vwf
+C:/Users/manuc/Desktop/insper/sem6/Arquit/MIPS/reg_reset.vhd
+C:/Users/manuc/Desktop/insper/sem6/Arquit/MIPS/somador.vhd
+C:/Users/manuc/Desktop/insper/sem6/Arquit/MIPS/ula.vhd
+c:/intelfpga_lite/18.1/quartus/bin64/assignment_defaults.qdf
+	======= Total: 17 files to archive =======
+
+	================ Status: ===============
+All files archived successfully.

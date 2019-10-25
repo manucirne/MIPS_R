@@ -4,13 +4,13 @@ use ieee.numeric_std.all;
 
 -- Baseado no apendice C (Register Files) do COD (Patterson & Hennessy).
 
-entity banco_reg is
+entity BC is
     generic
     (
-        larguraDados        : natural := 32;
+        larguraDados        : natural := 5;
         larguraEndBancoRegs : natural := 5   --Resulta em 2^5=32 posicoes
     );
--- Leitura de 2 BCsiges e escrita em 1 BCsig simultaneamente.
+-- Leitura de 2 registradores e escrita em 1 registrador simultaneamente.
     port
     (
         clk        : in std_logic;
@@ -27,35 +27,35 @@ entity banco_reg is
     );
 end entity;
 
-architecture comportamento of banco_reg is
-	 
-	 type blocoBC is array(0 TO 2**larguraEndBancoRegs - 1) of std_logic_vector(larguraDados-1 DOWNTO 0);
+architecture comportamento of BC is
 
-  function initBC
-        return blocoBC is variable tmp : blocoBC := (others => (others => '0'));
-  begin
-        -- Inicializa os endereços:
-        tmp(0) := x"00";
-        tmp(1) := x"01";
-        tmp(2) := x"02";
-        tmp(3) := x"03";
-        tmp(4) := x"04";
-        tmp(5) := x"05";
-        tmp(6) := x"06";
-        tmp(7) := x"07";
-        return tmp;
-    end initBC;
+    subtype palavra_t is std_logic_vector((larguraDados-1) downto 0);
+    type memoria_t is array(2**larguraEndBancoRegs-1 downto 0) of palavra_t;
+	 
+	 function initMemory
+        return memoria_t is variable tmp : memoria_t := (others => (others => '0'));
+	  begin
+			  -- Inicializa os endereços:
+			  tmp(1) := "00001";
+			  tmp(2) := "00010";
+			  tmp(3) := "00011";
+			  tmp(4) := "00100";
+			  tmp(5) := "00101";
+			  tmp(6) := "00110";
+			  tmp(7) := "00111";
+			  return tmp;
+		 end initMemory;
 
-    signal BCsig : blocoBC := initBC;
-	 
-	 
+    -- Declaracao dos registradores:
+    --shared variable registrador : memoria_t;
+	 signal memROM : memoria_t := initMemory;
 
 begin
     process(clk) is
     begin
         if (rising_edge(clk)) then
             if (escreveC = '1') then
-                BCsig(to_integer(unsigned(enderecoC))) <= dadoEscritaC;
+                memROM(to_integer(unsigned(enderecoC))) <= dadoEscritaC;
             end if;
         end if;
     end process;
@@ -66,12 +66,12 @@ begin
          if (unsigned(enderecoA) = 0) then
             saidaA <= (others => '0');
          else
-            saidaA <= BCsig(to_integer(unsigned(enderecoA)));
+            saidaA <= memROM(to_integer(unsigned(enderecoA)));
          end if;
          if (unsigned(enderecoB) = 0) then
             saidaB <= (others => '0');
          else
-            saidaB <= BCsig(to_integer(unsigned(enderecoB)));
+            saidaB <= memROM(to_integer(unsigned(enderecoB)));
         end if;
      end process;
 end architecture;
